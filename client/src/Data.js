@@ -15,18 +15,21 @@ export default class Data {
       options.body = JSON.stringify(body);
     }
 
-    if (requiresAuth) {    
-      const encodedCredentials = btoa(`${credentials.username}:${credentials.password}`);
-      options.headers['Authorization'] = `Basic ${encodedCredentials}`;
-    }
+    // if (requiresAuth) {    
+    //   const encodedCredentials = btoa(`${credentials.username}:${credentials.password}`);
+    //   options.headers['Authorization'] = `Basic ${encodedCredentials}`;
+    // }
     return fetch(url, options);
   }
 
   // sends out a API request to GET a list of courses
     async getCourses(){
-      const response = await this.api('/users', 'GET');
+      const response = await this.api('/courses', 'GET');
       if (response.status === 200){
-        return response.json().then(data => data);
+        return response.json().then(data => {
+          console.log(data.courses);
+          return data.courses;
+        });
       }
       else if (response.status === 401){
         return null;
@@ -36,6 +39,11 @@ export default class Data {
       }
 
     }
+
+    // TODO: sends out a API request to POST/Create a new course
+      // async createCourse(){
+      //   const response = await this.api('/courses', 'POST')
+      // }
 
   // async getUser(username, password) {
   //   const response = await this.api(`/users`, 'GET', null, true, { username, password });

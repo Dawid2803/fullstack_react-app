@@ -12,9 +12,9 @@ import withContext from './Context';
 
 function App() {
   
-  const courseListData = fetch('http://localhost:5000/api//courses')
-    .then(res =>res.json())
-    .then(data => console.log(data.courses));
+  // const courseListData = fetch('http://localhost:5000/api//courses')
+  //   .then(res =>res.json())
+  //   .then(data => console.log(data.courses));
 
     const CoursesWithContext = withContext(Courses);
     const HeaderWithContext = withContext(Header);

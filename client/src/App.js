@@ -1,5 +1,6 @@
 import Courses from './components/Courses';
 import Header from './components/Header';
+import CourseDetail from './components/CourseDetail';
 
 import {
   BrowserRouter as Router,
@@ -12,12 +13,9 @@ import withContext from './Context';
 
 function App() {
   
-  // const courseListData = fetch('http://localhost:5000/api//courses')
-  //   .then(res =>res.json())
-  //   .then(data => console.log(data.courses));
-
     const CoursesWithContext = withContext(Courses);
     const HeaderWithContext = withContext(Header);
+    const CourseDetailWithContext = withContext(CourseDetail);
     
   return (
     <Router>
@@ -26,6 +24,8 @@ function App() {
 
         <Switch>
             <Route exact path="/" component={CoursesWithContext} />
+            <Route path='/courses/:id' component={CourseDetailWithContext} />
+
         </Switch>
 
       </div>

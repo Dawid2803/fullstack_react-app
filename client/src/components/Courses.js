@@ -11,7 +11,6 @@ const Courses = (props) => {
         context.data.getCourses()
         .then(data => {
             if(data){
-                console.log(data)
                 setCourses(data)
             }else {
                 props.history.push('/error')

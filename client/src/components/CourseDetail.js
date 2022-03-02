@@ -4,7 +4,8 @@ import { Link, useParams } from 'react-router-dom';
 
 const CourseDetail = (props) => {
   const {context} = props;
-  const [courseDetails, setCourseDetails] = useState([]);
+  const [courseDetails, setCourseDetails] = useState('');
+  const [courseCreator, setCourseCreator] = useState('');
   const { id } = useParams();
 
   useEffect( () => {
@@ -12,15 +13,17 @@ const CourseDetail = (props) => {
       .then(data => {
         if(data){
           console.log(data);
-          setCourseDetails(data)
+          console.log(data.User);
+          setCourseDetails(data);
+          setCourseCreator(data.User);
         }
       })
       .catch(err => {
         console.log(err);
       })
-    }
-  )
-    const selectedCourse = courseDetails.course;
+    },
+    []);
+
   return (
     <div className='wrap'>
     <h2>Course Detail</h2>
@@ -28,19 +31,19 @@ const CourseDetail = (props) => {
       <div className='main--flex'>
         <div>
           <h3 className='course--detail--title'>Course</h3>
-          <h4 className='course--name'>{selectedCourse.title}</h4>
-          <p>By {selectedCourse.User.firstName} {selectedCourse.User.lastName}</p>
-          <p>{selectedCourse.description}</p>
+          <h4 className='course--name'>{courseDetails.title}</h4>
+          <p>By {courseDetails.User.firstName} {courseDetails.User.lastName}</p>
+          <p>{courseDetails.description}</p>
         </div>
         <div>
           <h3 className='course--detail--title'>Materials Needed</h3>
           <ul className='course-detail--list'>
-            <li>{selectedCourse.materialsNeeded}</li>
+            <li>{courseDetails.materialsNeeded}</li>
           </ul>
         </div>
       </div>
     </form>
-    </div>
+   </div>
   )
 }
 

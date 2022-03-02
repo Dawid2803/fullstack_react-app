@@ -19,7 +19,7 @@ const Courses = (props) => {
         .catch(err => {
             console.log(err);
         });
-    })
+    }, []);
 
     
         const courseList = courses.map( course => {

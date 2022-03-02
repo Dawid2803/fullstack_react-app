@@ -44,6 +44,8 @@ const CourseDetail = (props) => {
                 <ReactMarkdown>{courseDetails.description}</ReactMarkdown>
               </div>
               <div>
+                <h3 className='course--detail--title'>Estimated Time</h3>
+                <p>{courseDetails.estimatedTime}</p>
                 <h3 className='course--detail--title'>Materials Needed</h3>
                 <ReactMarkdown className='course-detail--list'>
                   {courseDetails.materialsNeeded}

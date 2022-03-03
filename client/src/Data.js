@@ -39,7 +39,7 @@ export default class Data {
 
     }
 
-  // TODO: sends out a API request to GET a course per id 
+  // sends out a API request to GET a course per id 
     async getCourse(id){
       const response = await this.api(`/courses/${id}`, 'GET');
       if(response.status === 200){
@@ -55,6 +55,17 @@ export default class Data {
       }
 
     }
+
+    // sends out a API request to update a course according to id
+      async updateCourse(course, id){
+        const response = await this.api(`/courses/${id}`, 'PUT', course);
+        if(response.status === 204){
+            return response.json().then(data => {
+              return data.course;
+            })
+        }
+      }
+
 
     // TODO: sends out a API request to POST/Create a new course
       // async createCourse(){

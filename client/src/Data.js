@@ -59,11 +59,16 @@ export default class Data {
     // sends out a API request to update a course according to id
       async updateCourse(course, id){
         const response = await this.api(`/courses/${id}`, 'PUT', course);
+        
         if(response.status === 204){
-            return response.json().then(data => {
-              return data.course;
-            })
+          return [];
         }
+        
+        // if(response.status === 204){
+        //     return response.json().then(data => {
+        //       return data.course;
+        //     })
+        // }
       }
 
 

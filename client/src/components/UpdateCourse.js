@@ -79,24 +79,6 @@ const UpdateCourse = (props) => {
             });
     }
 
-  const updatedCourse = {
-    title,
-    description,
-    estimatedTime,
-    materialsNeeded,
-  };
-
-  context.data
-    .updateCourse(updatedCourse, id)
-    .then(data => {
-      if (data) {
-        data.length ? console.log(data) : props.history.push(`/courses/${id}`);
-      }
-    })
-    .catch(err => {
-      console.log(err);
-      props.history.push('/error');
-    });
 }
 
 export default UpdateCourse

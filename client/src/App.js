@@ -1,6 +1,7 @@
 import Courses from './components/Courses';
 import Header from './components/Header';
 import CourseDetail from './components/CourseDetail';
+import CreateCourse from './components/CreateCourse';
 import UpdateCourse from './components/UpdateCourse';
 
 
@@ -19,6 +20,7 @@ function App() {
     const HeaderWithContext = withContext(Header);
     const CourseDetailWithContext = withContext(CourseDetail);
     const UpdateCourseWithContext = withContext(UpdateCourse);
+    const CreateCourseWithContext = withContext(CreateCourse);
     
   return (
     <Router>
@@ -27,7 +29,8 @@ function App() {
 
         <Switch>
             <Route exact path="/" component={CoursesWithContext} />
-            <Route exact path='/courses/:id' component={CourseDetailWithContext} />
+            <Route path='/courses/create' component={CreateCourseWithContext} />
+            <Route path='/courses/:id' component={CourseDetailWithContext} />
             <Route path='/courses/:id/update' component={UpdateCourseWithContext}/>
 
         </Switch>

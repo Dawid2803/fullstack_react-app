@@ -28,12 +28,34 @@ const UpdateCourse = (props) => {
                 console.log(err);
                 props.history.push('/error');
             })
-    }, [])
+    }, []);
+
+    const handleUpdate = (e) => {
+      e.preventDefault();
+      const updatedCourse = {
+          title,
+          description,
+          estimatedTime,
+          materialsNeeded,
+        };
+      
+        context.data
+          .updateCourse(updatedCourse, id)
+          .then(data => {
+            if (data) {
+              data.length ? console.log(data) : props.history.push(`/courses/${id}`);
+            }
+          })
+          .catch(err => {
+            console.log(err);
+            props.history.push('/error');
+          });
+  }
 
   return (
     <div className='wrap'>
         <h2>Update Course</h2>
-            <form onSubmit={(e) => handleUpdate(e)}>
+            <form onSubmit={handleUpdate}>
                 <div className="main--flex">
                     <div>
                         <label htmlFor="courseTitle">Course Title</label>
@@ -56,28 +78,6 @@ const UpdateCourse = (props) => {
             </form>
     </div>
   )
-
-    const handleUpdate = (e) => {
-        e.preventDefault();
-        const updatedCourse = {
-            title,
-            description,
-            estimatedTime,
-            materialsNeeded,
-          };
-        
-          context.data
-            .updateCourse(updatedCourse, id)
-            .then(data => {
-              if (data) {
-                data.length ? console.log(data) : props.history.push(`/courses/${id}`);
-              }
-            })
-            .catch(err => {
-              console.log(err);
-              props.history.push('/error');
-            });
-    }
 
 }
 

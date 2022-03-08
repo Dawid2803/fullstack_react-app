@@ -30,7 +30,7 @@ function App() {
         <Switch>
             <Route exact path="/" component={CoursesWithContext} />
             <Route path='/courses/create' component={CreateCourseWithContext} />
-            <Route path='/courses/:id' component={CourseDetailWithContext} />
+            <Route exact path='/courses/:id' component={CourseDetailWithContext} />
             <Route path='/courses/:id/update' component={UpdateCourseWithContext}/>
 
         </Switch>

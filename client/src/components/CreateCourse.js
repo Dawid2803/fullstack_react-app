@@ -9,38 +9,31 @@ const CreateCourse = (props) => {
     const [ materialsNeeded, setMaterialsNeeded] = useState('');
     const [ errors, setErrors] = useState([]);
 
-    return (
-        <main>
-        <div class="wrap">
-            <h2>Create Course</h2>
-            <ShowErrors errors={errors} />
-            <form>
-                <div class="main--flex">
-                    <div>
-                        <label for="courseTitle">Course Title</label>
-                        <input id="courseTitle" name="courseTitle" type="text" onChange={(e) => setTitle(e.target.value)} />
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const newCourse = {
+            title,
+            description,
+            estimatedTime,
+            materialsNeeded,
+          };
+        
+          context.data
+            .createCourse(newCourse)
+            .then(errors => {
+                if (errors) {
+                  setErrors(errors);
+                } else {
+                  props.history.push('/');
+                }
+            })
+            .catch(err => {
+              console.log(err);
+              props.history.push('/error');
+            });
+    }
 
-                        <p>By Joe Smith</p>
-
-                        <label for="courseDescription">Course Description</label>
-                        <textarea id="courseDescription" name="courseDescription" onChange={(e) => setDescription(e.target.value)}></textarea>
-                    </div>
-                    <div>
-                        <label for="estimatedTime">Estimated Time</label>
-                        <input id="estimatedTime" name="estimatedTime" type="text" onChange={(e) => setEstimatedTime(e.target.value)} />
-
-                        <label for="materialsNeeded">Materials Needed</label>
-                        <textarea id="materialsNeeded" name="materialsNeeded" onChange={(e) => setMaterialsNeeded(e.target.value)}></textarea>
-                    </div>
-                </div>
-                <button class="button" type="submit">Create Course</button><button class="button button-secondary" onclick="event.preventDefault(); location.href='index.html';">Cancel</button>
-            </form>
-        </div>
-        </main>
-    )
-
-
-    function ShowErrors({ errors }) {
+    const ShowErrors = ({ errors }) => {
         let DisplayErrors = null;
         if (errors.length) {
             DisplayErrors = (
@@ -57,6 +50,41 @@ const CreateCourse = (props) => {
   
     return DisplayErrors;
     }
+
+    return (
+        <main>
+        <div className="wrap">
+            <h2>Create Course</h2>
+            <ShowErrors errors={errors} />
+            <form onSubmit={handleSubmit}>
+                <div className="main--flex">
+                    <div>
+                        <label htmlFor="courseTitle">Course Title</label>
+                        <input id="courseTitle" name="courseTitle" type="text" onChange={(e) => setTitle(e.target.value)} />
+
+                        <p>By Joe Smith</p>
+
+                        <label htmlFor="courseDescription">Course Description</label>
+                        <textarea id="courseDescription" name="courseDescription" onChange={(e) => setDescription(e.target.value)}></textarea>
+                    </div>
+                    <div>
+                        <label htmlFor="estimatedTime">Estimated Time</label>
+                        <input id="estimatedTime" name="estimatedTime" type="text" onChange={(e) => setEstimatedTime(e.target.value)} />
+
+                        <label htmlFor="materialsNeeded">Materials Needed</label>
+                        <textarea id="materialsNeeded" name="materialsNeeded" onChange={(e) => setMaterialsNeeded(e.target.value)}></textarea>
+                    </div>
+                </div>
+                <button className="button" type="submit">Create Course</button><button className="button button-secondary" onClick={(e) => props.history.push('/')}>Cancel</button>
+            </form>
+        </div>
+        </main>
+    )
+
+
+
+
+  
 }
 
 export default CreateCourse

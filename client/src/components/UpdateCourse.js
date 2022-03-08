@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-//not updating ???
+//TODO: After authentication has been implemented:
+ //set auth user as person that updated course
 
 const UpdateCourse = (props) => {
     
@@ -11,6 +12,8 @@ const UpdateCourse = (props) => {
     const [ description, setDescription] = useState('');
     const [ estimatedTime, setEstimatedTime] = useState('');
     const [ materialsNeeded, setMaterialsNeeded] = useState('');
+    const [courseCreator, setCourseCreator] = useState('');
+
 
     const { id } = useParams();
 

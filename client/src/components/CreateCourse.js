@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
+
+
+//TODO: After authentication has been implemented:
+ //set auth user as person that created course
+
 const CreateCourse = (props) => {
 
     const { context } = props;

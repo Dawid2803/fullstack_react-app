@@ -4,6 +4,7 @@ import CourseDetail from './components/CourseDetail';
 import CreateCourse from './components/CreateCourse';
 import UpdateCourse from './components/UpdateCourse';
 import UserSignUp from './components/UserSignUp';
+import UserSignIn from './components/UserSignIn';
 
 
 import {
@@ -23,6 +24,7 @@ function App() {
     const UpdateCourseWithContext = withContext(UpdateCourse);
     const CreateCourseWithContext = withContext(CreateCourse);
     const CreateUserWithContext = withContext(UserSignUp);
+    const SignInWithContext = withContext(UserSignIn);
     
   return (
     <Router>
@@ -32,6 +34,7 @@ function App() {
         <Switch>
             <Route exact path="/" component={CoursesWithContext} />
             <Route path='/signup' component={CreateUserWithContext} />
+            <Route path='/signin' component={SignInWithContext} />
             <Route path='/courses/create' component={CreateCourseWithContext} />
             <Route exact path='/courses/:id' component={CourseDetailWithContext} />
             <Route path='/courses/:id/update' component={UpdateCourseWithContext}/>

@@ -9,12 +9,34 @@ const UserSignUp = (props) => {
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
 
+    const handleCreate = (e) => {
+      const newUser = {
+        firstName,
+        lastName,
+        emailAddress,
+        password
+      };
+
+      context.data.createUser(newUser)
+        .then(data => {
+          if(data.errors){
+            setErrors(data);
+          }else if(data){
+            //Sign in user after user has been created
+            context.actions.signIn(emailAddress, password)
+              .then(props.history.push('/'));
+          }else{
+            props.history.push('/error');
+          }
+        })
+    }
+
   return (
     <main>
         <div className="form--centered">
             <h2>Sign Up</h2>
             
-            <form>
+            <form onSubmit={handleCreate}>
                 <label htmlFor="firstName">First Name</label>
                 <input id="firstName" name="firstName" type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                 <label htmlFor="lastName">Last Name</label>

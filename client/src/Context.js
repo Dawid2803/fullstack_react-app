@@ -1,4 +1,4 @@
-//still need to update, copy from previous project
+
 
 import React, { Component } from 'react';
 import Cookies from 'js-cookie';

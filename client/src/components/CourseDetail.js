@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
-import reactMarkdown from 'react-markdown';
 
 const CourseDetail = (props) => {
   const {context} = props;

@@ -5,6 +5,7 @@ import CreateCourse from './components/CreateCourse';
 import UpdateCourse from './components/UpdateCourse';
 import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
+import { UserSignOut } from './components/UserSignOut';
 
 
 import {
@@ -14,6 +15,7 @@ import {
 } from 'react-router-dom';
 
 import withContext from './Context';
+import PrivateRoute from './PrivateRoute';
 
 
 function App() {
@@ -25,6 +27,7 @@ function App() {
     const CreateCourseWithContext = withContext(CreateCourse);
     const CreateUserWithContext = withContext(UserSignUp);
     const SignInWithContext = withContext(UserSignIn);
+    const SignOutWithContext = withContext(UserSignOut);
     
   return (
     <Router>
@@ -35,9 +38,10 @@ function App() {
             <Route exact path="/" component={CoursesWithContext} />
             <Route path='/signup' component={CreateUserWithContext} />
             <Route path='/signin' component={SignInWithContext} />
-            <Route path='/courses/create' component={CreateCourseWithContext} />
+            <Route path='/signout' compenent={SignOutWithContext} />
+            <PrivateRoute path='/courses/create' component={CreateCourseWithContext} />
             <Route exact path='/courses/:id' component={CourseDetailWithContext} />
-            <Route path='/courses/:id/update' component={UpdateCourseWithContext}/>
+            <PrivateRoute path='/courses/:id/update' component={UpdateCourseWithContext}/>
 
         </Switch>
 

@@ -56,29 +56,49 @@ export default class Data {
 
     }
 
-    // sends out a API request to update a course according to id
-      async updateCourse(course, id){
-        const response = await this.api(`/courses/${id}`, 'PUT', course);
-        
-        if(response.status === 204){
-          return [];
-        }
+
+
+
+  //sends out a API request to POST/Create a new course
+    async createCourse(course, authenticatedUser){
+      const response = await this.api('/courses', 'POST', course, true, { username: authenticatedUser.user.emailAddress, password: authenticatedUser.user.password });
+
+      if(response.status === 201){
+        console.log(response);
+      }else if(response.status === 400){
+        return response.json().then(data => {
+          return data.errors;
+        })
       }
 
+    }
 
-    //TODO: sends out a API request to POST/Create a new course
-      async createCourse(course){
-        const response = await this.api('/courses', 'POST', course);
-
-        if(response.status === 201){
-          console.log(response);
-        }else if(response.status === 400){
-          return response.json().then(data => {
-            return data.errors;
-          })
+        // sends out a API request to update a course according to id
+        async updateCourse(course, id){
+          const response = await this.api(`/courses/${id}`, 'PUT', course);
+          
+          if(response.status === 204){
+            return [];
+          }
         }
-
-      }
+  
+      // sends out a API request to delete a course according to id
+        async deleteCourse(id, authenticatedUser){
+          const response = await this.api(`/courses/${id}`, 'DELETE', null, true, { username: authenticatedUser.user.emailAddress, password: authenticatedUser.user.password });
+  
+          if(response.status === 204){
+            return;
+            //forbidden request
+          }else if (response.status === 403){
+            return response.json()
+                            .then(data => {
+                              return data.errors;
+                            });
+          }else{
+            throw new Error();
+          }
+  
+        }
 
   async getUser(username, password) {
     const response = await this.api(`/users`, 'GET', null, true, { username, password });

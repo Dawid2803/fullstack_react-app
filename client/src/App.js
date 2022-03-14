@@ -38,7 +38,7 @@ function App() {
             <Route exact path="/" component={CoursesWithContext} />
             <Route path='/signup' component={CreateUserWithContext} />
             <Route path='/signin' component={SignInWithContext} />
-            <Route path='/signout' compenent={SignOutWithContext} />
+            <Route path='/signout' component={SignOutWithContext} />
             <PrivateRoute path='/courses/create' component={CreateCourseWithContext} />
             <Route exact path='/courses/:id' component={CourseDetailWithContext} />
             <PrivateRoute path='/courses/:id/update' component={UpdateCourseWithContext}/>

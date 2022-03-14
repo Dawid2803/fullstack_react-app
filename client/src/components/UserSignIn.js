@@ -13,7 +13,7 @@ const UserSignIn = (props) => {
     if(username === '' || password === ''){
       setErrors(['Please enter a email address and password']);
     }else {
-      context.action.SignIn(username, password)
+      context.actions.signIn(username, password)
       .then(user => {
         if(user === null){
           setErrors(['Sign in was unsuccessfull']);
@@ -35,7 +35,7 @@ const UserSignIn = (props) => {
         <div className="form--centered">
             <h2>Sign In</h2>
             
-            <form onSubmit={handleUserSignIn}>
+            <form onSubmit={() => handleUserSignIn()}>
                 <label htmlFor="emailAddress">Email Address</label>
                 <input id="emailAddress" name="emailAddress" type="email" value={username} onChange={(e) => setUsername(e.target.value)} />
                 <label htmlFor="password">Password</label>

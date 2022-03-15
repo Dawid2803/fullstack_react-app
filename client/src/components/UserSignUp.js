@@ -24,7 +24,7 @@ const UserSignUp = (props) => {
           }else if(data){
             //Sign in user after user has been created
             context.actions.signIn(emailAddress, password)
-              .then(props.history.push('/'));
+              .then(props.history.goBack());
           }else{
             props.history.push('/error');
           }

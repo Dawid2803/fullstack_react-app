@@ -5,11 +5,12 @@ import { Link } from 'react-router-dom'
 
 const UserSignIn = (props) => {
   const { context } = props;
+  const { from } = props.location.state || { from: '/'};
   const [username, setUsername]  = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
 
-  const handleUserSignIn = (props) => {
+  const handleUserSignIn = () => {
     if(username === '' || password === ''){
       setErrors(['Please enter a email address and password']);
     }else {
@@ -18,8 +19,8 @@ const UserSignIn = (props) => {
         if(user === null){
           setErrors(['Sign in was unsuccessfull']);
         }else{
-          props.history.push('/');
           console.log(`${username} signed in successfully`);
+          props.history.push(from);
         }
       })
       .catch(err => {

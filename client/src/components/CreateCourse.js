@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
 
 
@@ -8,6 +9,7 @@ import React, { useState, useEffect } from 'react';
 const CreateCourse = (props) => {
 
     const { context } = props;
+    const authenticatedUser = context.authenticatedUser;
     const [ title, setTitle] = useState('');
     const [ description, setDescription] = useState('');
     const [ estimatedTime, setEstimatedTime] = useState('');
@@ -21,6 +23,7 @@ const CreateCourse = (props) => {
             description,
             estimatedTime,
             materialsNeeded,
+            userId: authenticatedUser.user.id
           };
         
           context.data
@@ -56,35 +59,47 @@ const CreateCourse = (props) => {
     return DisplayErrors;
     }
 
-    return (
-        <main>
-        <div className="wrap">
-            <h2>Create Course</h2>
-            <ShowErrors errors={errors} />
-            <form onSubmit={handleSubmit}>
-                <div className="main--flex">
-                    <div>
-                        <label htmlFor="courseTitle">Course Title</label>
-                        <input id="courseTitle" name="courseTitle" type="text" onChange={(e) => setTitle(e.target.value)} />
-
-                        <p>By Joe Smith</p>
-
-                        <label htmlFor="courseDescription">Course Description</label>
-                        <textarea id="courseDescription" name="courseDescription" onChange={(e) => setDescription(e.target.value)}></textarea>
+    const isAuthenticated = () =>  {
+        if(authenticatedUser){
+            return (
+                <main>
+                    <div className="wrap">
+                        <h2>Create Course</h2>
+                        <ShowErrors errors={errors} />
+                        <form onSubmit={handleSubmit}>
+                            <div className="main--flex">
+                                <div>
+                                    <label htmlFor="courseTitle">Course Title</label>
+                                    <input id="courseTitle" name="courseTitle" type="text" onChange={(e) => setTitle(e.target.value)} />
+            
+                                    <p>By {authenticatedUser.user.firstName} {authenticatedUser.user.lastName}</p>
+            
+                                    <label htmlFor="courseDescription">Course Description</label>
+                                    <textarea id="courseDescription" name="courseDescription" onChange={(e) => setDescription(e.target.value)}></textarea>
+                                </div>
+                                <div>
+                                    <label htmlFor="estimatedTime">Estimated Time</label>
+                                    <input id="estimatedTime" name="estimatedTime" type="text" onChange={(e) => setEstimatedTime(e.target.value)} />
+            
+                                    <label htmlFor="materialsNeeded">Materials Needed</label>
+                                    <textarea id="materialsNeeded" name="materialsNeeded" onChange={(e) => setMaterialsNeeded(e.target.value)}></textarea>
+                                </div>
+                            </div>
+                            <button className="button" type="submit">Create Course</button><button className="button button-secondary" onClick={(e) => props.history.push('/')}>Cancel</button>
+                        </form>
                     </div>
-                    <div>
-                        <label htmlFor="estimatedTime">Estimated Time</label>
-                        <input id="estimatedTime" name="estimatedTime" type="text" onChange={(e) => setEstimatedTime(e.target.value)} />
+                </main>
+            )
+        }else{
+            return <Redirect to="/signin" />;
+        }
+    }
 
-                        <label htmlFor="materialsNeeded">Materials Needed</label>
-                        <textarea id="materialsNeeded" name="materialsNeeded" onChange={(e) => setMaterialsNeeded(e.target.value)}></textarea>
-                    </div>
-                </div>
-                <button className="button" type="submit">Create Course</button><button className="button button-secondary" onClick={(e) => props.history.push('/')}>Cancel</button>
-            </form>
-        </div>
-        </main>
-    )
+    return isAuthenticated();
+
+  
+      
+    
 
 
 

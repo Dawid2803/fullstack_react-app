@@ -8,11 +8,12 @@ const UpdateCourse = (props) => {
     
 
     const { context } = props;
+    const authenticatedUser = context.authenticatedUser;
+    
     const [ title, setTitle] = useState('');
     const [ description, setDescription] = useState('');
     const [ estimatedTime, setEstimatedTime] = useState('');
     const [ materialsNeeded, setMaterialsNeeded] = useState('');
-    const [courseCreator, setCourseCreator] = useState('');
 
 
     const { id } = useParams();
@@ -20,11 +21,15 @@ const UpdateCourse = (props) => {
     useEffect(() => {
         context.data.getCourse(id)
             .then( data => {
-                if (data){
+                if (data.User.emailAddress === authenticatedUser.user.emailAddress){
+                  console.log(data);
                     setTitle(data.title);
                     setDescription(data.description);
                     setEstimatedTime(data.estimatedTime);
                     setMaterialsNeeded(data.materialsNeeded);
+                }else{
+                  console.log("Authorisation denied");
+                  props.history.push('/')
                 }
             })
             .catch( err => {
@@ -45,7 +50,7 @@ const UpdateCourse = (props) => {
         context.data
           .updateCourse(updatedCourse, id)
           .then(data => {
-            if (data) {
+            if (data ) {
               data.length ? console.log(data) : props.history.push(`/courses/${id}`);
             }
           })
@@ -58,13 +63,13 @@ const UpdateCourse = (props) => {
   return (
     <div className='wrap'>
         <h2>Update Course</h2>
-            <form onSubmit={handleUpdate}>
+            <form onSubmit={(e) => {handleUpdate(e)}}>
                 <div className="main--flex">
                     <div>
                         <label htmlFor="courseTitle">Course Title</label>
                         <input id="courseTitle" name="courseTitle" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
 
-                        <p>By Joe Smith</p>
+                        <p>By {authenticatedUser.user.firstName} {authenticatedUser.user.lastName}</p>
 
                         <label htmlFor="courseDescription">Course Description</label>
                         <textarea id="courseDescription" name="courseDescription" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>

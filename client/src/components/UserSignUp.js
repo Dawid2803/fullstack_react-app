@@ -10,6 +10,7 @@ const UserSignUp = (props) => {
     const [errors, setErrors] = useState([]);
 
     const handleCreate = (e) => {
+      e.preventDefault();
       const newUser = {
         firstName,
         lastName,
@@ -36,7 +37,7 @@ const UserSignUp = (props) => {
         <div className="form--centered">
             <h2>Sign Up</h2>
             
-            <form onSubmit={handleCreate}>
+            <form onSubmit={(e) => {handleCreate(e)}}>
                 <label htmlFor="firstName">First Name</label>
                 <input id="firstName" name="firstName" type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                 <label htmlFor="lastName">Last Name</label>

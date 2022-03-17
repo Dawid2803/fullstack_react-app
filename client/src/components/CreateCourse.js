@@ -27,7 +27,7 @@ const CreateCourse = (props) => {
           };
         
           context.data
-            .createCourse(newCourse)
+            .createCourse(newCourse, authenticatedUser)
             .then(errors => {
                 if (errors) {
                   setErrors(errors);
@@ -66,7 +66,7 @@ const CreateCourse = (props) => {
                     <div className="wrap">
                         <h2>Create Course</h2>
                         <ShowErrors errors={errors} />
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={(e) => {handleSubmit(e)}}>
                             <div className="main--flex">
                                 <div>
                                     <label htmlFor="courseTitle">Course Title</label>

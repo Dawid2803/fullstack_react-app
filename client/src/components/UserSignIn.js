@@ -10,7 +10,8 @@ const UserSignIn = (props) => {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
 
-  const handleUserSignIn = () => {
+  const handleUserSignIn = (e) => {
+    e.preventDefault();
     if(username === '' || password === ''){
       setErrors(['Please enter a email address and password']);
     }else {
@@ -36,7 +37,7 @@ const UserSignIn = (props) => {
         <div className="form--centered">
             <h2>Sign In</h2>
             
-            <form onSubmit={() => handleUserSignIn()}>
+            <form onSubmit={(e) => handleUserSignIn(e)}>
                 <label htmlFor="emailAddress">Email Address</label>
                 <input id="emailAddress" name="emailAddress" type="email" value={username} onChange={(e) => setUsername(e.target.value)} />
                 <label htmlFor="password">Password</label>

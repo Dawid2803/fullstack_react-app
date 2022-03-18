@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-//TODO: After authentication has been implemented:
- //set auth user as person that updated course
+
 
 const UpdateCourse = (props) => {
     
@@ -14,6 +13,8 @@ const UpdateCourse = (props) => {
     const [ description, setDescription] = useState('');
     const [ estimatedTime, setEstimatedTime] = useState('');
     const [ materialsNeeded, setMaterialsNeeded] = useState('');
+    const [ errors, setErrors] = useState([]);
+
 
 
     const { id } = useParams();
@@ -50,8 +51,8 @@ const UpdateCourse = (props) => {
         context.data
           .updateCourse(updatedCourse, id, authenticatedUser)
           .then(data => {
-            if (data ) {
-              data.length ? console.log(data) : props.history.push(`/courses/${id}`);
+            if (data) {
+              data.length ? setErrors(data) : props.history.push(`/courses/${id}`);
             }
           })
           .catch(err => {
@@ -60,9 +61,28 @@ const UpdateCourse = (props) => {
           });
   }
 
+  const ShowErrors = ({ errors }) => {
+    let DisplayErrors = null;
+    if (errors.length) {
+        DisplayErrors = (
+        <div className="validation--errors">
+            <h3>Validation Errors</h3>
+            <ul>
+            {errors.map((error, index) => (
+                <li key={index}>{error}</li>
+            ))}
+            </ul>
+        </div>
+        );
+    }
+
+return DisplayErrors;
+}
+
   return (
     <div className='wrap'>
         <h2>Update Course</h2>
+        <ShowErrors errors={errors} />
             <form onSubmit={(e) => {handleUpdate(e)}}>
                 <div className="main--flex">
                     <div>

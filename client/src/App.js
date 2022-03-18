@@ -6,6 +6,7 @@ import UpdateCourse from './components/UpdateCourse';
 import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
 import { UserSignOut } from './components/UserSignOut';
+import { DeleteCourse } from './components/DeleteCourse';
 
 
 import {
@@ -28,6 +29,7 @@ function App() {
     const CreateUserWithContext = withContext(UserSignUp);
     const SignInWithContext = withContext(UserSignIn);
     const SignOutWithContext = withContext(UserSignOut);
+    const DeleteCourseWithContext = withContext(DeleteCourse);
     
   return (
     <Router>
@@ -42,6 +44,7 @@ function App() {
             <PrivateRoute path='/courses/create' component={CreateCourseWithContext} />
             <Route exact path='/courses/:id' component={CourseDetailWithContext} />
             <PrivateRoute path='/courses/:id/update' component={UpdateCourseWithContext}/>
+            <Route path='/courses/:id/delete' component={DeleteCourseWithContext} />
 
         </Switch>
 

@@ -94,8 +94,9 @@ export default class Data {
   
           if(response.status === 204){
             return;
-            //forbidden request
-          }else if (response.status === 403){
+            
+          }//forbidden request
+          else if (response.status === 403){
             return response.json()
                             .then(data => {
                               return data.errors;

@@ -20,7 +20,7 @@ const UserSignUp = (props) => {
 
       context.data.createUser(newUser)
         .then(data => {
-          if(data.errors){
+          if(data.length){
             setErrors(data);
           }else if(data){
             //Sign in user after user has been created
@@ -32,11 +32,29 @@ const UserSignUp = (props) => {
         })
     }
 
+    const ShowErrors = ({ errors }) => {
+      let DisplayErrors = null;
+      if (errors.length) {
+          DisplayErrors = (
+          <div className="validation--errors">
+              <h3>Validation Errors</h3>
+              <ul>
+              {errors.map((error, index) => (
+                  <li key={index}>{error}</li>
+              ))}
+              </ul>
+          </div>
+          );
+      }
+  
+  return DisplayErrors;
+  }
+
   return (
     <main>
         <div className="form--centered">
             <h2>Sign Up</h2>
-            
+            <ShowErrors errors={errors} />
             <form onSubmit={(e) => {handleCreate(e)}}>
                 <label htmlFor="firstName">First Name</label>
                 <input id="firstName" name="firstName" type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />

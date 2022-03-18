@@ -8,6 +8,24 @@ const CourseDetail = (props) => {
   const [courseCreator, setCourseCreator] = useState('');
   const { id } = useParams();
 
+  const {authenticatedUser} = context;
+
+  const isAuthenticated = () => {
+    if(authenticatedUser){
+      if(authenticatedUser.user.id === courseCreator.id)
+      return (
+        <>
+          <Link className="button" to={`/courses/${id}/update`}>
+            Update Course
+          </Link>
+          <Link className="button" to={`/courses/${id}/delete`}>
+            Delete Course
+          </Link>
+        </>
+      );
+    }
+  }
+
   useEffect( () => {
     context.data.getCourse(id)
       .then(data => {
@@ -26,8 +44,7 @@ const CourseDetail = (props) => {
     <main>
       <div className="actions--bar">
             <div className="wrap">
-                <Link className="button" to={`/courses/${id}/update`}>Update Course</Link>
-                <Link className="button" to={`/courses/${id}/delete`}>Delete Course</Link>
+                {isAuthenticated()}
                 <Link className="button button-secondary" to="/">Return to List</Link>
             </div>
           </div>

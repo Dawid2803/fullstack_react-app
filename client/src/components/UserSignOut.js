@@ -6,7 +6,6 @@ export const UserSignOut = (props) => {
     const { context } = props;
     useEffect(() => {
         context.actions.signOut();
-        console.log(context.authenticatedUser);
     },);
   
     return (

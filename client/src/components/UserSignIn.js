@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-
+//sign in form, checks to see if user is already in the database and signs him in after validation
 
 const UserSignIn = (props) => {
   const { context } = props;

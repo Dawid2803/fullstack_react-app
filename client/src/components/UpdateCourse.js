@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 
-
+//updates course only if the authenticated user is the owner
 const UpdateCourse = (props) => {
     
 
@@ -60,7 +60,7 @@ const UpdateCourse = (props) => {
             props.history.push('/error');
           });
   }
-
+//displays errors only if there are any
   const ShowErrors = ({ errors }) => {
     let DisplayErrors = null;
     if (errors.length) {

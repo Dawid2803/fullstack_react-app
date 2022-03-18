@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import { Link } from 'react-router-dom';
 
+//populates the initial courses list on the home page dynamically
 const Courses = (props) => {
 
 

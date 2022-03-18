@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
+//populates course details according to the creator
 const CourseDetail = (props) => {
   const {context} = props;
   const [courseDetails, setCourseDetails] = useState('');

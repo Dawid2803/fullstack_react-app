@@ -3,8 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 
 
-//TODO: After authentication has been implemented:
- //set auth user as person that created course
+//Creates a course according to the details filled in on the form
 
 const CreateCourse = (props) => {
 

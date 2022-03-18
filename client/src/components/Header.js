@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom';
 
-//TODO: Include auth users details once authentication is in place
+//Header to show authenticated user details or sign in and up buttons
 
 const Header = (props) => {
   const { context } = props;

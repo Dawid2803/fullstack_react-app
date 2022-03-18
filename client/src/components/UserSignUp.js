@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+
+//Creates a new user on the database
+
 const UserSignUp = (props) => {
     const {context} = props; 
     const [firstName, setFirstName] = useState('');

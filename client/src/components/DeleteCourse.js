@@ -15,8 +15,12 @@ export const DeleteCourse = (props) => {
         console.log("Course deleted" );;    
     });
 
+
+
     return(
-        <Redirect to='/' />
+        <>
+            {props.history.push('/')}
+        </>
     )
   
 }

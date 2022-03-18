@@ -61,7 +61,7 @@ export default class Data {
 
   //sends out a API request to POST/Create a new course
     async createCourse(course, authenticatedUser){
-      const response = await this.api('/courses', 'POST', course, true, { username: authenticatedUser.user.emailAddress, password: authenticatedUser.user.password });
+      const response = await this.api('/courses', 'POST', course, true, { username: authenticatedUser.user.emailAddress, password: authenticatedUser.password });
 
       if(response.status === 201){
         console.log(response);
@@ -74,17 +74,23 @@ export default class Data {
     }
 
         // sends out a API request to update a course according to id
-        async updateCourse(course, id){
-          const response = await this.api(`/courses/${id}`, 'PUT', course);
+        async updateCourse(course, id, authenticatedUser){
+          const response = await this.api(`/courses/${id}`, 'PUT', course, true, { username: authenticatedUser.user.emailAddress, password: authenticatedUser.password});
           
           if(response.status === 204){
             return [];
+          }else if( response.status === 400){
+            return response.json().then(data => {
+              return data.errors;
+            });
+          }else{
+            throw new Error();
           }
         }
   
       // sends out a API request to delete a course according to id
         async deleteCourse(id, authenticatedUser){
-          const response = await this.api(`/courses/${id}`, 'DELETE', null, true, { username: authenticatedUser.user.emailAddress, password: authenticatedUser.user.password });
+          const response = await this.api(`/courses/${id}`, 'DELETE', null, true, { username: authenticatedUser.user.emailAddress, password: authenticatedUser.password });
   
           if(response.status === 204){
             return;

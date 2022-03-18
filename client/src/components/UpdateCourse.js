@@ -48,7 +48,7 @@ const UpdateCourse = (props) => {
         };
       
         context.data
-          .updateCourse(updatedCourse, id)
+          .updateCourse(updatedCourse, id, authenticatedUser)
           .then(data => {
             if (data ) {
               data.length ? console.log(data) : props.history.push(`/courses/${id}`);

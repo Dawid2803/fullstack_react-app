@@ -20,7 +20,7 @@ const Courses = (props) => {
         .catch(err => {
             console.log(err);
         });
-    }, []);
+    }, [context.data, props.history]);
 
     
         const courseList = courses.map( course => {

@@ -37,7 +37,7 @@ const UpdateCourse = (props) => {
                 console.log(err);
                 props.history.push('/error');
             })
-    }, []);
+    }, [ authenticatedUser.user.emailAddress, context.data, id ,props.history]);
 
     const handleUpdate = (e) => {
       e.preventDefault();

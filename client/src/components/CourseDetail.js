@@ -39,7 +39,7 @@ const CourseDetail = (props) => {
         console.log(err);
       })
     },
-    []);
+    [context.data, id]);
 
   return (
     <main>

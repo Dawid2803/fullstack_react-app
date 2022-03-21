@@ -19,6 +19,7 @@ const UserSignIn = (props) => {
       .then(user => {
         if(user === null){
           setErrors(['Sign in was unsuccessfull']);
+          console.log(errors);
         }else{
           console.log(`${username} signed in successfully`);
           props.history.push(from);
